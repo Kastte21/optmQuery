@@ -75,7 +75,6 @@ cd optimQuery
 CREATE DATABASE testdb;
 
 -- Crear tabla (se crea automáticamente con JPA)
--- La tabla se creará automáticamente al ejecutar la aplicación
 ```
 
 ### 3. Configurar Redis
@@ -83,20 +82,17 @@ CREATE DATABASE testdb;
 ```bash
 # Instalar Redis (Windows con WSL o Docker)
 docker run -d -p 6379:6379 redis:latest
-
-# O instalar Redis localmente
-# https://redis.io/download
 ```
 
 ### 4. Configurar variables de entorno
 
 ```bash
 # Crear archivo .env o configurar variables del sistema
-DB_USER=postgres
-DB_PASS=tu_contraseña
+DB_USER=user
+DB_PASS=pass
 ```
 
-## ⚙️ Configuración
+## Configuración
 
 ### Perfiles de aplicación
 
@@ -106,8 +102,8 @@ DB_PASS=tu_contraseña
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/testdb
-    username: postgres
-    password: tu_contraseña
+    username: user
+    password: pass
   data:
     redis:
       host: localhost
@@ -124,7 +120,7 @@ spring:
     password: ${DB_PASS}
 ```
 
-## 🎯 Uso
+## Uso
 
 ### Ejecutar la aplicación
 
@@ -148,7 +144,7 @@ http://localhost:8081/swagger-ui.html
 http://localhost:8081/actuator
 ```
 
-## 🚀 Optimizaciones Implementadas
+## Optimizaciones Implementadas
 
 ### 1. **Cache con Redis**
 
@@ -241,7 +237,7 @@ GET /api/resultados/resumen?mes=06
 }
 ```
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 src/main/java/com/kast/optimQuery/
@@ -263,45 +259,7 @@ src/main/java/com/kast/optimQuery/
 └── OptimQueryApplication.java    # Clase principal
 ```
 
-## 🔧 Configuración de Desarrollo
-
-### Variables de entorno recomendadas
-
-```bash
-# Base de datos
-DB_USER=postgres
-DB_PASS=tu_contraseña_segura
-
-# Redis
-REDIS_HOST=localhost
-REDIS_PORT=6379
-REDIS_PASSWORD=
-
-# Aplicación
-SERVER_PORT=8081
-SPRING_PROFILES_ACTIVE=local
-```
-
-### Comandos útiles
-
-```bash
-# Compilar
-mvn clean compile
-
-# Ejecutar tests
-mvn test
-
-# Ejecutar con perfil específico
-mvn spring-boot:run "-Dspring-boot.run.profiles=local"
-
-# Empaquetar
-mvn clean package
-
-# Ejecutar JAR
-java -jar target/optimQuery-0.0.1-SNAPSHOT.jar
-```
-
-## 📊 Monitoreo y Métricas
+## Monitoreo y Métricas
 
 ### Actuator Endpoints
 
@@ -315,66 +273,3 @@ java -jar target/optimQuery-0.0.1-SNAPSHOT.jar
 - `cache.gets` - Hits de cache
 - `cache.misses` - Misses de cache
 - `hikaricp.connections` - Conexiones de base de datos
-
-## 🚀 Despliegue
-
-### Docker (Recomendado)
-
-```dockerfile
-FROM openjdk:21-jdk-slim
-COPY target/optimQuery-0.0.1-SNAPSHOT.jar app.jar
-EXPOSE 8081
-ENTRYPOINT ["java", "-jar", "/app.jar"]
-```
-
-### Docker Compose
-
-```yaml
-version: '3.8'
-services:
-  app:
-    build: .
-    ports:
-      - "8081:8081"
-    environment:
-      - SPRING_PROFILES_ACTIVE=prod
-    depends_on:
-      - postgres
-      - redis
-  
-  postgres:
-    image: postgres:15
-    environment:
-      POSTGRES_DB: testdb
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-    ports:
-      - "5432:5432"
-  
-  redis:
-    image: redis:7
-    ports:
-      - "6379:6379"
-```
-
-## 🤝 Contribución
-
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
-## 📝 Licencia
-
-Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para detalles.
-
-## 📞 Contacto
-
-- **Desarrollador**: [Tu Nombre]
-- **Email**: [tu-email@ejemplo.com]
-- **Proyecto**: [https://github.com/tu-usuario/optimQuery](https://github.com/tu-usuario/optimQuery)
-
----
-
-⭐ **¡Si este proyecto te ayuda, dale una estrella!**
