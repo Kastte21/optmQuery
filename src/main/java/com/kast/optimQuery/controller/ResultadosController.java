@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kast.optimQuery.dto.ResultadosResumenDto;
-import com.kast.optimQuery.serivce.ResultadosService;
+import com.kast.optimQuery.service.ResultadosService;
 
 import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;

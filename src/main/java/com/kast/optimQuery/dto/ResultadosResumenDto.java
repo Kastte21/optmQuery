@@ -12,7 +12,7 @@ public class ResultadosResumenDto {
     private String telefono;
     private String start;
     private String estado;
-    private String obs; //TELEFONO, CELULAR o DESCONOCIDO
-    private String dia; //dia de start
-    private String mes; //mes de start
+    private String obs;
+    private String dia;
+    private String mes;
 }

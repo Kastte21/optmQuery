@@ -16,18 +16,14 @@ public interface ResultadosListasRepository extends Repository<ResultadosListas,
             r.telefono,
             r.start,
             r.estado,
-            CASE
-                WHEN LENGTH(r.telefono) = 7 THEN 'TELEFONO'
-                WHEN LENGTH(r.telefono) = 9 AND r.telefono LIKE '9%' AND r.telefono NOT IN ('999999999', '900000000') THEN 'CELULAR'
-                ELSE 'DESCONOCIDO'
-            END,
-            SUBSTRING(r.start, 9, 2),
-            SUBSTRING(r.start, 6, 2)
+            r.obs,
+            r.dia,
+            r.mes
         )
         FROM ResultadosListas r
         WHERE (:campana IS NULL OR r.campana <> :campana OR r.campana = 'nan')
-          AND (:dia IS NULL OR SUBSTRING(r.start,9,2) = :dia)
-          AND (:mes IS NULL OR SUBSTRING(r.start,6,2) = :mes)
+          AND (:dia IS NULL OR r.dia = :dia)
+          AND (:mes IS NULL OR r.mes = :mes)
     """)
     Page<ResultadosResumenDto> findResultadosOptimizados(
         @Param("campana") String campana,

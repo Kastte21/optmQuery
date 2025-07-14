@@ -22,7 +22,8 @@ import lombok.Setter;
         @Index(name = "idx_resultados_listas_start", columnList = "start"),
         @Index(name = "idx_resultados_listas_estado", columnList = "estado"),
         @Index(name = "idx_resultados_listas_campana_start", columnList = "campana, start"),
-        @Index(name = "idx_resultados_listas_campana_estado", columnList = "campana, estado")
+        @Index(name = "idx_resultados_listas_campana_estado", columnList = "campana, estado"),
+        @Index(name = "idx_resultados_listas_start_doc_telf_estado", columnList = "documento, telefono,start, estado") 
     })
 @Getter
 @Setter
@@ -80,5 +81,14 @@ public class ResultadosListas {
     private String estado;
 
     @Column(length = 50)
-    private String gestion;    
+    private String gestion;
+
+    @Column(length = 4)
+    private String dia;
+
+    @Column(length = 4)
+    private String mes;
+
+    @Column(length = 13)
+    private String obs;
 }

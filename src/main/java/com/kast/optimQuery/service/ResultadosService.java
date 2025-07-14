@@ -1,4 +1,4 @@
-package com.kast.optimQuery.serivce;
+package com.kast.optimQuery.service;
 
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
